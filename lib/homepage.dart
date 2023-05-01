@@ -71,10 +71,11 @@ class _HomePageState extends State<HomePage> {
   List<List<double>> _output = [[0.0, 0.0, 0.0, 0.0, 0.0, 0.0]];
   int _indexOfMax=0;
   String _predictionLabel = "";
+  String? _machineType = ''; // newly added
 
   void _submit() {
     // Get values from text fields
-    final machineType = _machineTypeController.text;
+    final machineType = _machineType;
     final airTemp = double.tryParse(_airTempController.text);
     final processTemp = double.tryParse(_processTempController.text);
     final rotationalSpeed = double.tryParse(_rotationalSpeedController.text);
@@ -83,7 +84,7 @@ class _HomePageState extends State<HomePage> {
     
 
     // Check if all values are valid
-    if (machineType.isNotEmpty && airTemp != null && processTemp != null &&
+    if ( airTemp != null && processTemp != null &&
         rotationalSpeed != null && torque != null && toolWear != null) {
       //  Call function to pass input to TFLite model and get result
       // Replace with your own code
@@ -119,7 +120,7 @@ class _HomePageState extends State<HomePage> {
 
   void _clear(){
     setState(() {
-      _machineTypeController.text = "";
+      // _machineTypeController.text = "";
       _airTempController.text = "";
       _processTempController.text = "";
       _rotationalSpeedController.text = "";
@@ -128,6 +129,7 @@ class _HomePageState extends State<HomePage> {
       _output = [[0.0, 0.0, 0.0, 0.0, 0.0, 0.0]];
       _indexOfMax=0;
       _predictionLabel = "";
+      _machineType = "";
     });
   }
 
@@ -144,10 +146,45 @@ class _HomePageState extends State<HomePage> {
           Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            TextFormField(
-              controller: _machineTypeController,
-              decoration: InputDecoration(labelText: 'Machine Type'),
-            ),
+            Text('Machine Type'),
+              Row(
+                children: [
+                  Radio(
+                    value: 'M',
+                    groupValue: _machineType,
+                    onChanged: (value) {
+                      setState(() {
+                        _machineType = value;
+                      });
+                    },
+                  ),
+                  Text('M'),
+                  Radio(
+                    value: 'L',
+                    groupValue: _machineType,
+                    onChanged: (value) {
+                      setState(() {
+                        _machineType = value;
+                      });
+                    },
+                  ),
+                  Text('L'),
+                  Radio(
+                    value: 'H',
+                    groupValue: _machineType,
+                    onChanged: (value) {
+                      setState(() {
+                        _machineType = value;
+                      });
+                    },
+                  ),
+                  Text('H'),
+                ],
+              ),
+            // TextFormField(
+            //   controller: _machineTypeController,
+            //   decoration: InputDecoration(labelText: 'Machine Type'),
+            // ),
             TextFormField(
               controller: _airTempController,
               keyboardType: TextInputType.number,

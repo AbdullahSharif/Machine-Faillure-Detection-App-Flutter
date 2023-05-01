@@ -6,7 +6,7 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
-  String? _machineType = 'M';
+  String? _machineType = '';
   double _airTemp = 0;
   double _processTemp = 0;
   double _rotationalSpeed = 0;
