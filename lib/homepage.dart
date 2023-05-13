@@ -144,6 +144,7 @@ class _HomePageState extends State<HomePage> {
         child: SingleChildScrollView (
           child:(
           Column(
+
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text('Machine Type'),
@@ -214,10 +215,13 @@ class _HomePageState extends State<HomePage> {
               onPressed: _submit,
               child: Text('Submit'),
             ),
+            SizedBox(height: 10),
             ElevatedButton(
               onPressed: _clear,
               child: Text('Clear'),
+              
             ),
+            
             SizedBox(height: 16),
             // Text(_result),
             Results(twfProb: _output[0][0], hdfProb: _output[0][1], pwfProb: _output[0][2], osfProb: _output[0][3], rnfProb: _output[0][4], noFailureProb: _output[0][5], prediction: _predictionLabel,)

@@ -25,13 +25,14 @@ class Results extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _buildResultRow('Probability of TWF', twfProb),
-        _buildResultRow('Probability of HDF', hdfProb),
-        _buildResultRow('Probability of PWF', pwfProb),
-        _buildResultRow('Probability of OSF', osfProb),
-        _buildResultRow('Probability of RNF', rnfProb),
+        _buildResultRow('Probability of Tool Wear Failure (TWF)', twfProb),
+        _buildResultRow('Probability of Heat Dissipation Failure (HDF)', hdfProb),
+        _buildResultRow('Probability of Power Failure (PWF)', pwfProb),
+        _buildResultRow('Probability of Overstrain Failure (OSF)', osfProb),
+        _buildResultRow('Probability of Random Failures (RNF)', rnfProb),
         _buildResultRow('Probability of No failure', noFailureProb),
-        _buildResultRow('Prediction : ', prediction),
+        SizedBox(height: 16,),
+        _buildPredictionRow('Final Prediction : ', prediction),
       ],
     );
   }
@@ -49,4 +50,20 @@ class Results extends StatelessWidget {
       ),
     );
   }
+
+  Widget _buildPredictionRow(String label, dynamic value) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8),
+      child: Row(
+        children: [
+          Expanded(child: Text(label, style: TextStyle(fontWeight: FontWeight.bold))),
+          value is String?
+          Text(value, style: TextStyle(fontWeight: FontWeight.bold)) :
+          Text('${value.toStringAsFixed(2)}%', style: TextStyle(fontWeight: FontWeight.bold)),
+        ],
+      ),
+    );
+  }
+
+  
 }
